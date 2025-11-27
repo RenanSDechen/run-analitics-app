@@ -1,0 +1,41 @@
+# --- IDEs e Sistema Operacional ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Frontend (Node/Next.js) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnp.*
+
+# --- Backend (.NET 8) ---
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/TestResults/
+backend/*.user
+backend/*.suo
+backend/*.userprefs
+
+# --- Dados do Banco de Dados (Se houver volumes locais mapeados) ---
+mysql_data/
+postgres_data/
+
+# --- Segredos (Opcional, mas recomendado ignorar configs locais com senhas reais) ---
+# backend/appsettings.Development.json 
+# (Deixei comentado acima. Se quiser subir para facilitar, mantenha assim. 
+# Se for projeto real de produção, descomente para não subir senhas)

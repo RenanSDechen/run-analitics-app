@@ -1,0 +1,17 @@
+Para este MVP, usaremos uma lógica de Progressão Linear com Tapering (Polimento):
+
+    Volume Base: Definido pelo Objetivo (ex: 5k começa leve, Maratona começa médio).
+
+    Progressão: Aumentamos o volume/intensidade em ~10% a cada semana.
+
+    Semana de Recuperação: A cada 4 semanas, reduzimos a carga.
+
+    Tapering: Nas últimas 2 semanas, reduzimos drasticamente o volume para a prova.
+
+    Distribuição Semanal:
+
+        3 treinos: 1 Tiro (Velocidade), 1 Rodagem (Leve), 1 Longo.
+
+        4 treinos: +1 Rodagem.
+
+        5 treinos: +1 Tempo Run (Ritmo).

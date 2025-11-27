@@ -1,0 +1,13 @@
+/* Importa os estilos base do Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Configuração dos Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}

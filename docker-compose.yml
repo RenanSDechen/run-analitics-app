@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Serviço do Backend (.NET 8)
+  backend:
+    container_name: runanalitics-api
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080" 
+    environment:
+      # MUDANÇA AQUI: String de conexão formatada para MySQL
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=runanalitics_db;User=admin;Password=adminpass
+    depends_on:
+      - db 
+    networks:
+      - runanalitics-net
+
+  # Serviço do Frontend (Next.js)
+  frontend:
+    container_name: runanalitics-web
+    build:
+      context: ./frontend 
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - backend
+    networks:
+      - runanalitics-net
+
+  # Serviço do Banco de Dados (MySQL 8.0)
+  db:
+    container_name: runanalitics-db
+    image: mysql:8.0 # MUDANÇA AQUI
+    # O 'command' garante que ele use o 'caching_sha2_password' 
+    # que é o padrão moderno de autenticação que o .NET 8 espera.
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      # MUDANÇA AQUI: Variáveis do MySQL
+      - MYSQL_DATABASE=runanalitics_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=adminpass
+      - MYSQL_ROOT_PASSWORD=root_super_secret_password # Senha de root (diferente do user)
+    ports:
+      - "3306:3306" # MUDANÇA AQUI: Porta padrão do MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql # MUDANÇA AQUI: Pasta de dados do MySQL
+    networks:
+      - runanalitics-net
+
+# Definição dos volumes (para persistência do DB)
+volumes:
+  mysql_data: # MUDANÇA AQUI
+
+# Definição da rede privada para os containers se comunicarem
+networks:
+  runanalitics-net:
+    driver: bridge
