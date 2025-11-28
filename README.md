@@ -32,7 +32,7 @@ graph TD
     API -->|Processa| Service[Workout Generator Service]
     Service -->|Lê/Escreve| EF[Entity Framework Core]
     EF -->|SQL| DB[(MySQL Database)]
-
+```
 
 Decisões Técnicas
 
