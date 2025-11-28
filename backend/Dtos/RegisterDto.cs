@@ -27,4 +27,5 @@ public class RegisterDto
 
     // Aqui está o objeto aninhado com os detalhes do plano
     public PlanDetailsDto PlanDetails { get; set; } = new();
+    public string CaptchaToken { get; set; } = string.Empty;
 }

@@ -8,11 +8,12 @@ import { ProgressBar } from '@/components/signup/ProgressBar'
 import { Label } from '@/components/ui/Label'
 import { Input } from '@/components/ui/Input'
 import { PasswordStrengthMeter } from '@/components/signup/PasswordStrengthMeter'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function SignupRegisterPage() {
   const router = useRouter()
   const { flowData } = useSignupFlow()
-
+  const [captchaToken, setCaptchaToken] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -34,7 +35,10 @@ export default function SignupRegisterPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
-
+    if (!captchaToken) {
+      setError("Por favor, verifique que você não é um robô.")
+      return
+    }
     // Validação básica de senha
     if (password !== confirmPassword) {
       setError('As senhas não conferem.')
@@ -59,6 +63,7 @@ export default function SignupRegisterPage() {
         weeks: Number(flowData.weeksToTrain), 
         workoutsPerWeek: flowData.workoutsPerWeek,
       },
+      captchaToken: captchaToken,
     }
 
     try {
@@ -185,6 +190,14 @@ export default function SignupRegisterPage() {
               disabled={isLoading}
             />
           </div>
+        </div>
+        
+        <div className="flex justify-center my-4">
+          <Turnstile 
+            siteKey="1x00000000000000000000AA" // Chave de Teste da Cloudflare (Sempre Passa)
+            onSuccess={(token) => setCaptchaToken(token)}
+            options={{ theme: 'dark' }} // Combina com seu tema
+          />
         </div>
 
         {error && (

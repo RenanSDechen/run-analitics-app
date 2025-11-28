@@ -13,6 +13,8 @@ builder.Services.AddScoped<WorkoutGeneratorService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<CaptchaService>(); // <--- NOVO
+builder.Services.AddHttpClient();
 
 // Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
